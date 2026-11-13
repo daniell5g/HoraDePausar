@@ -26,6 +26,9 @@ struct WeekStrip: View {
             Label(caption.text, systemImage: caption.symbol)
                 .font(.system(size: 11.5))
                 .foregroundStyle(.secondary)
+                // Narrow sidebar: keep the caption on one line instead of wrapping under the icon.
+                .lineLimit(1)
+                .minimumScaleFactor(0.8)
             // Quiet company credit, always visible under the week.
             Text("\(L("Feito por", "Made by")) \(Brand.company)")
                 .font(.system(size: 10.5))
