@@ -19,12 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-The MIT License above covers the source code. The Bible text bundled in
-Core/Resources keeps its own license:
-
-- passages.pt-BR: Bíblia Livre (BLIVRE), © Diego Santos, Mario Sérgio and
-  Marco Teles, Creative Commons Atribuição 3.0 Brasil (CC BY 3.0 BR).
-- passages.en: World English Bible (WEB), public domain.
