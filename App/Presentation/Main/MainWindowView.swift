@@ -56,13 +56,17 @@ struct MainWindowView: View {
         // grow and shrink between sections, moving the close/minimize buttons and the layout. An
         // empty toolbar item still drops the toolbar, so the menu stays in place, hidden elsewhere.
         .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                let isToday = (coordinator.mainSection ?? .today) == .today
+            let isToday = (coordinator.mainSection ?? .today) == .today
+            // The id changes with the section so the item is rebuilt: the background visibility is
+            // only read when the toolbar item is created.
+            ToolbarItem(id: isToday ? "week-theme" : "week-theme-hidden", placement: .primaryAction) {
                 WeekThemeMenu()
                     .opacity(isToday ? 1 : 0)
                     .allowsHitTesting(isToday)
                     .accessibilityHidden(!isToday)
             }
+            // Without this the hidden menu still leaves its glass capsule in the title bar.
+            .sharedBackgroundVisibility(isToday ? .automatic : .hidden)
         }
         .frame(minWidth: 900, minHeight: 620)
         .onAppear { store.ensureToday() }

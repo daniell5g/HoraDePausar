@@ -44,9 +44,9 @@ struct JournalView: View {
                                 .help(L("Criar imagem", "Create image"))
                         }
                         .padding(.vertical, 6)
-                        .subtleScrollers()
                     }
                 }
+                .subtleScrollIndicator()
             }
         }
         .navigationTitle(L("Diário", "Journal"))

@@ -38,8 +38,8 @@ struct MemorizeView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 6)
-                .subtleScrollers()
             }
+            .subtleScrollIndicator()
             .frame(maxHeight: .infinity)
             HStack(spacing: 10) {
                 Button(L("Fechar", "Close")) { dismiss() }

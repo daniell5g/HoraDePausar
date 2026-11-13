@@ -36,8 +36,8 @@ struct PassageGrid: View {
                     }
                 }
                 .padding(20)
-                .subtleScrollers()
             }
+            .subtleScrollIndicator()
         }
     }
 }

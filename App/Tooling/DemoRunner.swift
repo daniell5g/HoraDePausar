@@ -40,15 +40,16 @@ struct DemoRunner {
                 // Walks the sidebar sections, to watch how the window changes between them.
                 coordinator.openMain()
                 let order: [MainSection] = [.journal, .favorites, .library, .settings, .today, .settings, .journal]
+                let pace = 3.0  // leaves time for a window capture before the next switch
                 for (step, section) in order.enumerated() {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5 * Double(step + 1)) { coordinator.mainSection = section }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + pace * Double(step + 1)) { coordinator.mainSection = section }
                     if let dir = cycleDir {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5 * Double(step + 1) + 1.0) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + pace * Double(step + 1) + 1.0) {
                             recordWindow(to: dir, name: "\(step + 1)-\(section.rawValue)")
                         }
                     }
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5 * Double(order.count + 1)) { if cycleDir != nil { exit(0) } }
+                DispatchQueue.main.asyncAfter(deadline: .now() + pace * Double(order.count + 1)) { if cycleDir != nil { exit(0) } }
             default: break
             }
         }
@@ -92,10 +93,13 @@ struct DemoRunner {
         } else {
             try? line.write(to: dir.appendingPathComponent("metrics.txt"), atomically: true, encoding: .utf8)
         }
-        guard let view = window.contentView?.superview ?? window.contentView,
-              let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else { return }
-        view.cacheDisplay(in: view.bounds, to: rep)
-        try? rep.representation(using: .png, properties: [:])?.write(to: dir.appendingPathComponent("\(name).png"))
+        // A real window-server capture (needs Screen Recording for whoever launched the app): it
+        // keeps the sidebar glass and the backgrounds that cacheDisplay leaves out.
+        let capture = Process()
+        capture.executableURL = URL(fileURLWithPath: "/usr/sbin/screencapture")
+        capture.arguments = ["-x", "-o", "-l", String(window.windowNumber), dir.appendingPathComponent("\(name).png").path]
+        try? capture.run()
+        capture.waitUntilExit()
     }
 
     /// Writes today's share image in every theme and format, then quits.

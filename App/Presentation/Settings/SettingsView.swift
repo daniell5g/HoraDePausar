@@ -21,7 +21,6 @@ struct SettingsView: View {
                 Picker(L("Idioma", "Language"), selection: Binding(get: { store.language }, set: { store.setLanguage($0) })) {
                     ForEach(AppLanguage.allCases, id: \.self) { Text($0.nativeName).tag($0) }
                 }
-                .subtleScrollers()
             } footer: {
                 Text(L("Muda o app e as passagens.", "Changes the app and the passages."))
                     .foregroundStyle(.secondary)
@@ -96,6 +95,7 @@ struct SettingsView: View {
             }
         }
         .formStyle(.grouped)
+        .subtleScrollIndicator()
         .scrollBounceBehavior(.basedOnSize)
         .frame(maxWidth: 560)
         .frame(maxWidth: .infinity)

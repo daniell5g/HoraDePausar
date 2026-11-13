@@ -56,43 +56,57 @@ struct IconGlassButton: View {
     }
 }
 
-/// Thin scrollbars that only show while scrolling, on the dark surfaces. With a mouse plugged in,
-/// macOS otherwise draws the wide, always-on "legacy" scrollbar with a light track.
-private struct SubtleScrollers: NSViewRepresentable {
-    func makeNSView(context: Context) -> NSView { Probe() }
-    func updateNSView(_ nsView: NSView, context: Context) { (nsView as? Probe)?.apply() }
+/// A thin, dim scroll indicator drawn by the app. The system one is a near-white bar that widens
+/// under the pointer, which looks coarse in this dark app. It shows while scrolling (and briefly
+/// when the view appears, as macOS does) and then fades out.
+private struct SubtleScrollIndicator: ViewModifier {
+    @State private var geometry: ScrollGeometry?
+    @State private var visible = false
+    @State private var hide: Task<Void, Never>?
 
-    final class Probe: NSView {
-        private var observer: NSObjectProtocol?
-
-        override func viewDidMoveToWindow() {
-            super.viewDidMoveToWindow()
-            apply()
-            // The system resets the style when a mouse is plugged in or the setting changes.
-            if observer == nil {
-                observer = NotificationCenter.default.addObserver(
-                    forName: NSScroller.preferredScrollerStyleDidChangeNotification, object: nil, queue: .main
-                ) { [weak self] _ in self?.apply() }
+    func body(content: Content) -> some View {
+        content
+            .scrollIndicators(.never)
+            .onScrollGeometryChange(for: ScrollGeometry.self, of: { $0 }) { old, new in
+                geometry = new
+                if old.contentOffset != new.contentOffset { reveal() }
             }
-        }
-
-        func apply() {
-            DispatchQueue.main.async { [weak self] in
-                guard let scrollView = self?.enclosingScrollView else { return }
-                scrollView.scrollerStyle = .overlay
-                scrollView.scrollerKnobStyle = .light
+            .overlay(alignment: .topTrailing) {
+                GeometryReader { proxy in bar(height: proxy.size.height) }
+                    .allowsHitTesting(false)
+                    .accessibilityHidden(true)
             }
-        }
+            .onAppear { reveal() }
+    }
 
-        override func removeFromSuperview() {
-            if let observer { NotificationCenter.default.removeObserver(observer) }
-            observer = nil
-            super.removeFromSuperview()
+    @ViewBuilder private func bar(height: CGFloat) -> some View {
+        if let geometry, geometry.contentSize.height > geometry.visibleRect.height + 1 {
+            let inset: CGFloat = 4, width: CGFloat = 4
+            let track = height - inset * 2
+            let length = max(track * geometry.visibleRect.height / geometry.contentSize.height, 28)
+            let travel = geometry.contentSize.height - geometry.visibleRect.height
+            let progress = min(max(geometry.visibleRect.minY / travel, 0), 1)
+            Capsule()
+                .fill(Color.white.opacity(0.18))
+                .frame(width: width, height: length)
+                .offset(x: -inset, y: inset + (track - length) * progress)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .opacity(visible ? 1 : 0)
+                .animation(.easeOut(duration: 0.35), value: visible)
+        }
+    }
+
+    private func reveal() {
+        visible = true
+        hide?.cancel()
+        hide = Task { @MainActor in
+            try? await Task.sleep(for: .seconds(1.2))
+            if !Task.isCancelled { visible = false }
         }
     }
 }
 
 extension View {
-    /// Thin overlay scrollbars for the scroll view this view sits in.
-    func subtleScrollers() -> some View { background(SubtleScrollers()) }
+    /// Replaces the system scroll indicator of this scroll view with a thin, dim one.
+    func subtleScrollIndicator() -> some View { modifier(SubtleScrollIndicator()) }
 }
