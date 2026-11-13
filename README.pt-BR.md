@@ -18,7 +18,7 @@ você parar, ler, orar e voltar ao seu dia.
 <img src="https://img.shields.io/badge/idiomas-pt--BR%20%7C%20English-009C3B" alt="Português do Brasil e inglês">
 <img src="https://img.shields.io/badge/privacidade-nenhum%20dado%20coletado-5B6B73" alt="Nenhum dado coletado">
 
-[Por que existe](#por-que-existe) · [Recursos](#o-que-faz) · [Compilar e rodar](#compilar-e-rodar) · [Testes](#testes) · [Arquitetura](#arquitetura) · [Texto bíblico](#texto-bíblico-e-licença)
+[Por que existe](#por-que-existe) · [Recursos](#o-que-faz) · [Compilar e rodar](#compilar-e-rodar) · [Testes](#testes) · [Arquitetura](#arquitetura) · [Texto bíblico](#texto-bíblico-e-licença) · [Como contribuir](#como-contribuir) · [Licença](#licença)
 
 <img src="docs/screenshots/today.png" alt="A tela Hoje com a passagem do dia" width="720">
 
@@ -162,6 +162,16 @@ trechos, então notas de rodapé e títulos foram removidos, e uma aspa de fecha
 foi acrescentado quando o trecho termina no meio da frase. Toda imagem compartilhada em inglês
 leva o crédito *World English Bible (WEB) · Public Domain*. `extract_web.py` monta as passagens em
 inglês a partir dos arquivos USFM da WEB.
+
+## Como contribuir
+
+O projeto é aberto: qualquer pessoa pode abrir uma issue ou um pull request. Todo pull request
+precisa da aprovação do mantenedor antes de entrar. Veja [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Licença
+
+O código-fonte está sob a [Licença MIT](LICENSE). O texto bíblico mantém a própria licença,
+descrita acima.
 
 ---
 

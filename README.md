@@ -18,7 +18,7 @@ read, pray and go back to your day.
 <img src="https://img.shields.io/badge/languages-English%20%7C%20pt--BR-009C3B" alt="English and Brazilian Portuguese">
 <img src="https://img.shields.io/badge/privacy-no%20data%20collected-5B6B73" alt="No data collected">
 
-[Why it exists](#why-it-exists) · [Features](#what-it-does) · [Build and run](#build-and-run) · [Tests](#tests) · [Architecture](#architecture) · [Bible text](#bible-text-and-license)
+[Why it exists](#why-it-exists) · [Features](#what-it-does) · [Build and run](#build-and-run) · [Tests](#tests) · [Architecture](#architecture) · [Bible text](#bible-text-and-license) · [Contributing](#contributing) · [License](#license)
 
 <img src="docs/screenshots/en/today.png" alt="The Today screen with today's passage" width="720">
 
@@ -159,6 +159,16 @@ Formatting changes: Psalm titles and brackets removed, final punctuation and som
 Every Portuguese share image carries the credit *Bíblia Livre (BLIVRE) · CC BY 3.0 BR*.
 `curate_passages.py` is the script that picked the 365 passages and their themes from the source
 text.
+
+## Contributing
+
+The project is open: anyone can open an issue or a pull request. Every pull request needs the
+maintainer's approval before it is merged. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## License
+
+The source code is released under the [MIT License](LICENSE). The Bible text keeps its own license,
+described above.
 
 ---
 
