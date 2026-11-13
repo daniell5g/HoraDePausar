@@ -14,6 +14,8 @@ struct LaunchOptions {
     var memorizeLevel = 0
     var snapshotDir: URL?
     var exportDir: URL?
+    /// Where the `cycle` demo saves each section's window and button position.
+    var cycleDir: URL?
 
     /// Screenshot/export runs, which must leave the real install alone.
     var isToolingRun: Bool { demo != nil || exportDir != nil }
@@ -26,7 +28,8 @@ struct LaunchOptions {
                              demo: defaults.string(forKey: "Demo"),
                              memorizeLevel: defaults.integer(forKey: "DemoLevel"),
                              snapshotDir: url("Snapshot"),
-                             exportDir: url("Export"))
+                             exportDir: url("Export"),
+                             cycleDir: url("CycleDir"))
         #else
         return LaunchOptions()
         #endif

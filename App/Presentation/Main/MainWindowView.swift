@@ -52,6 +52,18 @@ struct MainWindowView: View {
             case .settings: SettingsView()
             }
         }
+        // One toolbar for every section. A toolbar that only "Hoje" had made the window's title bar
+        // grow and shrink between sections, moving the close/minimize buttons and the layout. An
+        // empty toolbar item still drops the toolbar, so the menu stays in place, hidden elsewhere.
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                let isToday = (coordinator.mainSection ?? .today) == .today
+                WeekThemeMenu()
+                    .opacity(isToday ? 1 : 0)
+                    .allowsHitTesting(isToday)
+                    .accessibilityHidden(!isToday)
+            }
+        }
         .frame(minWidth: 900, minHeight: 620)
         .onAppear { store.ensureToday() }
     }

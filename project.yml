@@ -7,8 +7,8 @@ options:
 settings:
   base:
     SWIFT_VERSION: "6.0"
-    MARKETING_VERSION: "0.1.0"
-    CURRENT_PROJECT_VERSION: "1"
+    MARKETING_VERSION: "1.1"
+    CURRENT_PROJECT_VERSION: "2"
     MACOSX_DEPLOYMENT_TARGET: "26.0"
     # Local ad-hoc signature only: no Developer ID, no notarization, no App Store.
     CODE_SIGN_IDENTITY: "-"
@@ -39,6 +39,8 @@ targets:
       properties:
         CFBundleDisplayName: "Hora de Pausar"
         CFBundleName: "Hora de Pausar"
+        CFBundleShortVersionString: "$(MARKETING_VERSION)"
+        CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
         LSUIElement: true
         LSApplicationCategoryType: public.app-category.lifestyle
         NSHumanReadableCopyright: "© 2026 TechDaniel's. Texto bíblico: Bíblia Livre (BLIVRE), versão de fevereiro de 2018, CC BY 3.0 BR. English text: World English Bible (WEB), public domain."

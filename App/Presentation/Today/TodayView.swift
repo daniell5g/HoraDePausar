@@ -77,11 +77,6 @@ struct TodayView: View {
         }
         .environment(\.colorScheme, theme.isLight ? .light : .dark)
         .navigationTitle(L("Hoje", "Today"))
-        .toolbar {
-            ToolbarItem {
-                WeekThemeMenu()
-            }
-        }
         .onAppear {
             // A sheet asked for before "Hoje" opened (see `AppCoordinator.requestedTodaySheet`).
             guard let request = coordinator.requestedTodaySheet else { return }

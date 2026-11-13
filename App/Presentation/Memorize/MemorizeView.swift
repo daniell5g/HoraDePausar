@@ -38,6 +38,7 @@ struct MemorizeView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 6)
+                .subtleScrollers()
             }
             .frame(maxHeight: .infinity)
             HStack(spacing: 10) {

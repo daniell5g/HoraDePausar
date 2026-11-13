@@ -55,3 +55,44 @@ struct IconGlassButton: View {
         .help(help)
     }
 }
+
+/// Thin scrollbars that only show while scrolling, on the dark surfaces. With a mouse plugged in,
+/// macOS otherwise draws the wide, always-on "legacy" scrollbar with a light track.
+private struct SubtleScrollers: NSViewRepresentable {
+    func makeNSView(context: Context) -> NSView { Probe() }
+    func updateNSView(_ nsView: NSView, context: Context) { (nsView as? Probe)?.apply() }
+
+    final class Probe: NSView {
+        private var observer: NSObjectProtocol?
+
+        override func viewDidMoveToWindow() {
+            super.viewDidMoveToWindow()
+            apply()
+            // The system resets the style when a mouse is plugged in or the setting changes.
+            if observer == nil {
+                observer = NotificationCenter.default.addObserver(
+                    forName: NSScroller.preferredScrollerStyleDidChangeNotification, object: nil, queue: .main
+                ) { [weak self] _ in self?.apply() }
+            }
+        }
+
+        func apply() {
+            DispatchQueue.main.async { [weak self] in
+                guard let scrollView = self?.enclosingScrollView else { return }
+                scrollView.scrollerStyle = .overlay
+                scrollView.scrollerKnobStyle = .light
+            }
+        }
+
+        override func removeFromSuperview() {
+            if let observer { NotificationCenter.default.removeObserver(observer) }
+            observer = nil
+            super.removeFromSuperview()
+        }
+    }
+}
+
+extension View {
+    /// Thin overlay scrollbars for the scroll view this view sits in.
+    func subtleScrollers() -> some View { background(SubtleScrollers()) }
+}
