@@ -18,7 +18,7 @@ você parar, ler, orar e voltar ao seu dia.
 <img src="https://img.shields.io/badge/idiomas-pt--BR%20%7C%20English-009C3B" alt="Português do Brasil e inglês">
 <img src="https://img.shields.io/badge/privacidade-nenhum%20dado%20coletado-5B6B73" alt="Nenhum dado coletado">
 
-[Por que existe](#por-que-existe) · [Recursos](#o-que-faz) · [Compilar e rodar](#compilar-e-rodar) · [Testes](#testes) · [Arquitetura](#arquitetura) · [Texto bíblico](#texto-bíblico-e-licença) · [Como contribuir](#como-contribuir) · [Licença](#licença)
+[Baixar](#baixar) · [Por que existe](#por-que-existe) · [Recursos](#o-que-faz) · [Compilar e rodar](#compilar-e-rodar) · [Testes](#testes) · [Arquitetura](#arquitetura) · [Texto bíblico](#texto-bíblico-e-licença) · [Como contribuir](#como-contribuir) · [Licença](#licença)
 
 <img src="docs/screenshots/today.png" alt="A tela Hoje com a passagem do dia" width="720">
 
@@ -67,6 +67,15 @@ não precisa de internet. Tudo o que ele sabe sobre você fica no seu Mac.
 <p align="center">
   <img src="docs/screenshots/memorize.png" alt="Decorar: memorizando uma passagem" width="560">
 </p>
+
+## Baixar
+
+Baixe o `.dmg` mais recente em [Releases](https://github.com/daniell5g/HoraDePausar/releases/latest),
+abra e arraste o **Hora de Pausar** para Aplicativos.
+
+O app ainda não é autenticado pela Apple, então na primeira vez o macOS avisa que não consegue
+verificá-lo. Para abrir: tente abrir o app uma vez, depois vá em **Ajustes do Sistema → Privacidade
+e Segurança** e clique em **Abrir Mesmo Assim**. Só precisa fazer isso uma vez.
 
 ## Requisitos
 

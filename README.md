@@ -18,7 +18,7 @@ read, pray and go back to your day.
 <img src="https://img.shields.io/badge/languages-English%20%7C%20pt--BR-009C3B" alt="English and Brazilian Portuguese">
 <img src="https://img.shields.io/badge/privacy-no%20data%20collected-5B6B73" alt="No data collected">
 
-[Why it exists](#why-it-exists) · [Features](#what-it-does) · [Build and run](#build-and-run) · [Tests](#tests) · [Architecture](#architecture) · [Bible text](#bible-text-and-license) · [Contributing](#contributing) · [License](#license)
+[Download](#download) · [Why it exists](#why-it-exists) · [Features](#what-it-does) · [Build and run](#build-and-run) · [Tests](#tests) · [Architecture](#architecture) · [Bible text](#bible-text-and-license) · [Contributing](#contributing) · [License](#license)
 
 <img src="docs/screenshots/en/today.png" alt="The Today screen with today's passage" width="720">
 
@@ -64,6 +64,15 @@ data and doesn't need the internet. Everything it knows about you stays on your 
 <p align="center">
   <img src="docs/screenshots/en/memorize.png" alt="Memorize: learning a passage by heart" width="560">
 </p>
+
+## Download
+
+Get the latest `.dmg` from [Releases](https://github.com/daniell5g/HoraDePausar/releases/latest),
+open it and drag **Hora de Pausar** to Applications.
+
+The app is not notarized by Apple yet, so the first time macOS will say it cannot verify it. To open
+it: try to open the app once, then go to **System Settings → Privacy & Security** and click
+**Open Anyway**. You only need to do this once.
 
 ## Requirements
 
